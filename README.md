@@ -1,95 +1,98 @@
-# AI-teacher-
 <!DOCTYPE html>
 
 <html lang="en">
 
 <head>
 
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>AI Mastery Academy</title>
+<title>AI Mastery Academy</title>
 
-  <style>
+<style>
 
-    body {
+body {
 
-      font-family: Arial;
+  margin: 0;
 
-      margin: 0;
+  font-family: Arial;
 
-      background: #0f172a;
+  background: #0f172a;
 
-      color: white;
+  color: white;
 
-      text-align: center;
+  text-align: center;
 
-    }
+}
 
-    header {
+header {
 
-      padding: 20px;
+  background: #1e293b;
 
-      background: #1e293b;
+  padding: 20px;
 
-    }
+}
 
-    .card {
+.card {
 
-      background: #1e293b;
+  background: #1e293b;
 
-      margin: 20px;
+  margin: 15px;
 
-      padding: 20px;
+  padding: 15px;
 
-      border-radius: 12px;
+  border-radius: 12px;
 
-    }
+}
 
-    button {
+button {
 
-      padding: 12px 20px;
+  padding: 12px;
 
-      border: none;
+  border: none;
 
-      border-radius: 8px;
+  border-radius: 8px;
 
-      background: #38bdf8;
+  background: #38bdf8;
 
-      font-weight: bold;
+  font-weight: bold;
 
-    }
+  cursor: pointer;
 
-    .progress {
+  margin: 5px;
 
-      width: 100%;
+}
 
-      background: #334155;
+.lesson {
 
-      height: 20px;
+  display: none;
 
-      border-radius: 10px;
+}
 
-      overflow: hidden;
+.progress {
 
-      margin-top: 10px;
+  background: #334155;
 
-    }
+  height: 15px;
 
-    #bar {
+  border-radius: 10px;
 
-      width: 0%;
+  overflow: hidden;
 
-      height: 100%;
+}
 
-      background: #22c55e;
+#bar {
 
-      transition: 0.3s;
+  height: 100%;
 
-    }
+  width: 0%;
 
-  </style>
+  background: #22c55e;
+
+}
+
+</style>
 
 </head>
 
@@ -99,55 +102,147 @@
 
   <h1>AI Mastery Academy</h1>
 
-  <p>20-Day AI Learning Journey (Beginner → Intermediate)</p>
+  <p>Beginner → Intermediate AI Course</p>
 
 </header>
 
-<div class="card">
+<div class="card" id="home">
 
   <h2>Welcome</h2>
 
-  <p>Learn AI step-by-step with quizzes, fun challenges, and real skills.</p>
+  <p>20 days to learn AI step-by-step</p>
 
-  <button onclick="start()">Start Course</button>
+  <button onclick="startCourse()">Start Learning</button>
 
 </div>
 
 <div class="card">
 
-  <h2>Progress</h2>
+  <h3>Progress</h3>
 
-  <p id="text">0% Complete</p>
+  <p id="progressText">0% Complete</p>
 
-  <div class="progress">
+  <div class="progress"><div id="bar"></div></div>
 
-    <div id="bar"></div>
+</div>
 
-  </div>
+<!-- LESSON VIEW -->
+
+<div class="card lesson" id="lessonBox">
+
+  <h2 id="lessonTitle"></h2>
+
+  <p id="lessonContent"></p>
+
+  <button onclick="nextLesson()">Next Lesson</button>
+
+  <div id="quizBox" style="margin-top:15px;"></div>
 
 </div>
 
 <script>
 
-  let progress = 0;
+let current = parseInt(localStorage.getItem("day")) || 0;
 
-  function start() {
+let progress = parseInt(localStorage.getItem("progress")) || 0;
 
-    progress = 5;
+const lessons = Array.from({length: 20}, (_, i) => ({
 
-    update();
+  title: `Day ${i+1}`,
 
-    alert("Course started! Next we’ll build lessons and quizzes.");
+  content: `This is lesson ${i+1}. We will expand this with videos, AI prompts, and exercises later.`
+
+}));
+
+function startCourse() {
+
+  document.getElementById("home").style.display = "none";
+
+  document.getElementById("lessonBox").style.display = "block";
+
+  loadLesson();
+
+}
+
+function loadLesson() {
+
+  let lesson = lessons[current];
+
+  document.getElementById("lessonTitle").innerText = lesson.title;
+
+  document.getElementById("lessonContent").innerText = lesson.content;
+
+  document.getElementById("quizBox").innerHTML = `
+
+    <h4>Quick Quiz</h4>
+
+    <p>What is AI?</p>
+
+    <button onclick="answer(true)">A system that learns</button>
+
+    <button onclick="answer(false)">Just robots</button>
+
+  `;
+
+}
+
+function answer(correct) {
+
+  if(correct) {
+
+    alert("Correct! +5% progress");
+
+    progress += 5;
+
+  } else {
+
+    alert("Not quite — AI is broader than robots.");
 
   }
 
-  function update() {
+  updateProgress();
 
-    document.getElementById("text").innerText = progress + "% Complete";
+}
 
-    document.getElementById("bar").style.width = progress + "%";
+function nextLesson() {
+
+  if(current < 19) {
+
+    current++;
+
+    progress += 5;
+
+    save();
+
+    loadLesson();
+
+    updateProgress();
+
+  } else {
+
+    alert("You completed the course!");
 
   }
+
+}
+
+function updateProgress() {
+
+  document.getElementById("progressText").innerText = progress + "% Complete";
+
+  document.getElementById("bar").style.width = progress + "%";
+
+}
+
+function save() {
+
+  localStorage.setItem("day", current);
+
+  localStorage.setItem("progress", progress);
+
+}
+
+updateProgress();
 
 </script>
 
