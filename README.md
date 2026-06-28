@@ -50,6 +50,8 @@ button {
 
   padding: 12px;
 
+  margin: 5px;
+
   border: none;
 
   border-radius: 8px;
@@ -59,14 +61,6 @@ button {
   font-weight: bold;
 
   cursor: pointer;
-
-  margin: 5px;
-
-}
-
-.lesson {
-
-  display: none;
 
 }
 
@@ -92,6 +86,18 @@ button {
 
 }
 
+iframe {
+
+  width: 100%;
+
+  max-width: 500px;
+
+  height: 250px;
+
+  border-radius: 10px;
+
+}
+
 </style>
 
 </head>
@@ -100,149 +106,189 @@ button {
 
 <header>
 
-  <h1>AI Mastery Academy</h1>
+<h1>AI Mastery Academy</h1>
 
-  <p>Beginner → Intermediate AI Course</p>
+<p>Beginner → Intermediate AI Course</p>
 
 </header>
 
 <div class="card" id="home">
 
-  <h2>Welcome</h2>
+<h2>Welcome</h2>
 
-  <p>20 days to learn AI step-by-step</p>
+<p>20-day structured AI training program</p>
 
-  <button onclick="startCourse()">Start Learning</button>
+<button onclick="start()">Start Course</button>
 
 </div>
 
 <div class="card">
 
-  <h3>Progress</h3>
+<h3>Progress</h3>
 
-  <p id="progressText">0% Complete</p>
+<p id="progressText">0% Complete</p>
 
-  <div class="progress"><div id="bar"></div></div>
+<div class="progress"><div id="bar"></div></div>
 
 </div>
 
-<!-- LESSON VIEW -->
+<div class="card" id="lessonBox" style="display:none;">
 
-<div class="card lesson" id="lessonBox">
+<h2 id="title"></h2>
 
-  <h2 id="lessonTitle"></h2>
+<div id="video"></div>
 
-  <p id="lessonContent"></p>
+<p id="content"></p>
 
-  <button onclick="nextLesson()">Next Lesson</button>
+<div id="quiz"></div>
 
-  <div id="quizBox" style="margin-top:15px;"></div>
+<button onclick="next()">Next Lesson</button>
 
 </div>
 
 <script>
 
-let current = parseInt(localStorage.getItem("day")) || 0;
+let day = parseInt(localStorage.getItem("day")) || 0;
+
+let scoreNeeded = 80;
 
 let progress = parseInt(localStorage.getItem("progress")) || 0;
 
-const lessons = Array.from({length: 20}, (_, i) => ({
+const lessons = [
 
-  title: `Day ${i+1}`,
+{
 
-  content: `This is lesson ${i+1}. We will expand this with videos, AI prompts, and exercises later.`
+title: "Day 1 - What is AI?",
 
-}));
+video: "https://www.youtube.com/embed/2ePf9rue1Ao",
 
-function startCourse() {
+content: "AI is software that learns patterns from data.",
 
-  document.getElementById("home").style.display = "none";
+quiz: [
 
-  document.getElementById("lessonBox").style.display = "block";
+{q:"What is AI?",a:["A system that learns","A robot only","A calculator"],correct:0},
 
-  loadLesson();
+{q:"Can AI make mistakes?",a:["Yes","No"],correct:0}
 
-}
+]
 
-function loadLesson() {
+},
 
-  let lesson = lessons[current];
+{
 
-  document.getElementById("lessonTitle").innerText = lesson.title;
+title: "Day 2 - What is ChatGPT?",
 
-  document.getElementById("lessonContent").innerText = lesson.content;
+video: "https://www.youtube.com/embed/JTxsNm9IdYU",
 
-  document.getElementById("quizBox").innerHTML = `
+content: "ChatGPT is a large language model that predicts text.",
 
-    <h4>Quick Quiz</h4>
+quiz: [
 
-    <p>What is AI?</p>
+{q:"What is ChatGPT?",a:["AI text generator","A robot","A search engine"],correct:0},
 
-    <button onclick="answer(true)">A system that learns</button>
+{q:"Does it understand like humans?",a:["Not exactly","Yes fully"],correct:0}
 
-    <button onclick="answer(false)">Just robots</button>
-
-  `;
+]
 
 }
 
-function answer(correct) {
+];
 
-  if(correct) {
+let score = 0;
 
-    alert("Correct! +5% progress");
+function start() {
 
-    progress += 5;
+document.getElementById("home").style.display="none";
 
-  } else {
+document.getElementById("lessonBox").style.display="block";
 
-    alert("Not quite — AI is broader than robots.");
-
-  }
-
-  updateProgress();
+load();
 
 }
 
-function nextLesson() {
+function load() {
 
-  if(current < 19) {
+let l = lessons[day];
 
-    current++;
+document.getElementById("title").innerText = l.title;
 
-    progress += 5;
+document.getElementById("content").innerText = l.content;
 
-    save();
+document.getElementById("video").innerHTML =
 
-    loadLesson();
+`<iframe src="${l.video}" allowfullscreen></iframe>`;
 
-    updateProgress();
+let html = "<h3>Quiz</h3>";
 
-  } else {
+l.quiz.forEach((q,i)=>{
 
-    alert("You completed the course!");
+html += `<p>${q.q}</p>`;
 
-  }
+q.a.forEach((ans,j)=>{
+
+html += `<button onclick="answer(${i},${j})">${ans}</button>`;
+
+});
+
+});
+
+document.getElementById("quiz").innerHTML = html;
+
+score = 0;
 
 }
 
-function updateProgress() {
+function answer(qi, ai) {
 
-  document.getElementById("progressText").innerText = progress + "% Complete";
+let q = lessons[day].quiz[qi];
 
-  document.getElementById("bar").style.width = progress + "%";
+if(ai === q.correct) score += 50;
+
+alert("Answer recorded");
+
+}
+
+function next() {
+
+if(score >= scoreNeeded) {
+
+day++;
+
+progress += 10;
+
+save();
+
+update();
+
+load();
+
+alert("Lesson unlocked!");
+
+} else {
+
+alert("You need 80% to continue");
+
+}
+
+}
+
+function update() {
+
+document.getElementById("progressText").innerText = progress + "% Complete";
+
+document.getElementById("bar").style.width = progress + "%";
 
 }
 
 function save() {
 
-  localStorage.setItem("day", current);
+localStorage.setItem("day",day);
 
-  localStorage.setItem("progress", progress);
+localStorage.setItem("progress",progress);
 
 }
 
-updateProgress();
+update();
 
 </script>
 
