@@ -374,3 +374,481 @@ Next Lesson
 </div>
 
 </section>
+
+<section id="pricing">
+
+<div class="container">
+
+<h2>Choose Your Plan</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Starter</h3>
+
+<h1>$49</h1>
+
+<p>Perfect for beginners</p>
+
+<ul style="text-align:left;line-height:2;">
+
+<li>✔ Full AI Basics Course</li>
+
+<li>✔ Prompt Library</li>
+
+<li>✔ Downloadable Resources</li>
+
+<li>✔ Lifetime Access</li>
+
+</ul>
+
+<br>
+
+<button onclick="buyCourse('Starter')">
+Enroll Now
+</button>
+
+</div>
+
+<div class="card" style="border:3px solid #00d4ff;transform:scale(1.05);">
+
+<h3>Pro (Most Popular)</h3>
+
+<h1>$149</h1>
+
+<p>Everything in Starter plus:</p>
+
+<ul style="text-align:left;line-height:2;">
+
+<li>✔ Advanced AI Lessons</li>
+
+<li>✔ AI Business Training</li>
+
+<li>✔ Weekly Live Sessions</li>
+
+<li>✔ Community Access</li>
+
+<li>✔ Certificates</li>
+
+</ul>
+
+<br>
+
+<button onclick="buyCourse('Pro')">
+Get Pro Access
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>Elite</h3>
+
+<h1>$499</h1>
+
+<p>For serious entrepreneurs</p>
+
+<ul style="text-align:left;line-height:2;">
+
+<li>✔ Everything in Pro</li>
+
+<li>✔ Private Coaching</li>
+
+<li>✔ Website Templates</li>
+
+<li>✔ AI Automation Systems</li>
+
+<li>✔ Business Launch Kit</li>
+
+</ul>
+
+<br>
+
+<button onclick="buyCourse('Elite')">
+Join Elite
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="testimonials">
+
+<div class="container">
+
+<h2>Student Success Stories</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>★★★★★</h3>
+
+<p>
+"This course completely changed how I use AI every day."
+</p>
+
+<strong>- Sarah M.</strong>
+
+</div>
+
+<div class="card">
+
+<h3>★★★★★</h3>
+
+<p>
+"I built my first AI business within two months."
+</p>
+
+<strong>- Jason R.</strong>
+
+</div>
+
+<div class="card">
+
+<h3>★★★★★</h3>
+
+<p>
+"Hands down the best AI course I've taken."
+</p>
+
+<strong>- Amanda T.</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</section>
+
+<section id="faq">
+
+<div class="container">
+
+<h2>Frequently Asked Questions</h2>
+
+<div class="card">
+
+<h3>Do I need any AI experience?</h3>
+
+<p>
+No. This course is designed for complete beginners and gradually progresses to advanced topics.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>How long do I have access?</h3>
+
+<p>
+Once enrolled, you'll receive lifetime access to all course content and future updates.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Will I receive a certificate?</h3>
+
+<p>
+Yes! After completing all lessons and passing the final assessment, you'll receive your AI Mastery Academy Certificate.
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Can I access the course on mobile?</h3>
+
+<p>
+Absolutely. The website is fully responsive and works on phones, tablets, and computers.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<div class="container">
+
+<h2>Contact Us</h2>
+
+<div class="card">
+
+<form onsubmit="submitContact(event)">
+
+<input
+type="text"
+id="name"
+placeholder="Your Name"
+required
+style="width:100%;padding:15px;margin:10px 0;border-radius:8px;border:none;"
+>
+
+<input
+type="email"
+id="email"
+placeholder="Your Email"
+required
+style="width:100%;padding:15px;margin:10px 0;border-radius:8px;border:none;"
+>
+
+<textarea
+id="message"
+placeholder="Your Message"
+required
+style="width:100%;padding:15px;height:150px;margin:10px 0;border-radius:8px;border:none;"
+></textarea>
+
+<button type="submit">
+Send Message
+</button>
+
+</form>
+
+<p id="contactSuccess" class="hidden">
+✅ Thanks! Your message has been received.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<div class="container">
+
+<h3>AI Mastery Academy</h3>
+
+<p>
+Empowering the next generation with Artificial Intelligence.
+</p>
+
+<p>
+© 2026 AI Mastery Academy. All Rights Reserved.
+</p>
+
+</div>
+
+</footer>
+
+<script>
+
+const lessons = [
+
+{
+title: "Welcome to AI Mastery Academy",
+video: "https://www.youtube.com/embed/aircAruvnKk",
+content: "Welcome! In this lesson you'll learn what Artificial Intelligence is, where it's used today, and how you'll master it throughout this course."
+},
+
+{
+title: "Understanding Prompt Engineering",
+video: "https://www.youtube.com/embed/jC4v5AS4RIM",
+content: "Learn how to write prompts that produce accurate, detailed, and consistent AI responses."
+},
+
+{
+title: "Using AI for Productivity",
+video: "https://www.youtube.com/embed/5MgBikgcWnY",
+content: "Discover how AI can help with writing, scheduling, brainstorming, coding, research, and automation."
+},
+
+{
+title: "Building Your AI Business",
+video: "https://www.youtube.com/embed/G2fqAlgmoPo",
+content: "Put everything together and begin building your own AI-powered business or career."
+}
+
+];
+
+let currentLesson = 0;
+
+function openLesson(index){
+
+currentLesson = index;
+
+document.getElementById("lesson").scrollIntoView({
+behavior:"smooth"
+});
+
+const box = document.getElementById("lessonBox");
+
+box.classList.remove("hidden");
+
+document.getElementById("lessonTitle").innerHTML =
+lessons[index].title;
+
+document.getElementById("lessonVideo").innerHTML =
+`<iframe width="100%" height="450"
+src="${lessons[index].video}"
+frameborder="0"
+allowfullscreen>
+</iframe>`;
+
+document.getElementById("lessonContent").innerHTML =
+lessons[index].content;
+
+loadQuiz(index);
+
+}
+
+function nextLesson(){
+
+currentLesson++;
+
+if(currentLesson >= lessons.length){
+
+alert("🎉 Congratulations! You've completed the course.");
+
+return;
+
+}
+
+openLesson(currentLesson);
+
+}
+
+function loadQuiz(index){
+
+const quiz = document.getElementById("quizArea");
+
+const questions = [
+
+{
+question:"What does AI stand for?",
+answers:[
+"Artificial Intelligence",
+"Automatic Internet",
+"Applied Information"
+],
+correct:0
+},
+
+{
+question:"What is Prompt Engineering?",
+answers:[
+"Writing effective instructions for AI",
+"Repairing computers",
+"Programming websites"
+],
+correct:0
+},
+
+{
+question:"Which task can AI help with?",
+answers:[
+"Writing",
+"Research",
+"Automation"
+],
+correct:0
+},
+
+{
+question:"What's the goal of this academy?",
+answers:[
+"Learn practical AI skills",
+"Build confidence",
+"Create AI-powered projects"
+],
+correct:0
+}
+
+];
+
+const q = questions[index];
+
+quiz.innerHTML = `
+<h3>${q.question}</h3>
+
+${q.answers.map((a,i)=>
+`<button
+style="display:block;margin:10px auto;"
+onclick="checkAnswer(${i},${q.correct})">
+${a}
+</button>`
+).join("")}
+
+<div id="quizResult"></div>
+`;
+
+}
+
+function checkAnswer(selected, correct){
+
+const result = document.getElementById("quizResult");
+
+if(selected === correct){
+
+result.innerHTML =
+"<p style='color:#00ff88;font-weight:bold;'>✅ Correct! Great job.</p>";
+
+}else{
+
+result.innerHTML =
+"<p style='color:#ff4d4d;font-weight:bold;'>❌ Incorrect. Try again.</p>";
+
+}
+
+}
+
+function buyCourse(plan){
+
+alert(`🚀 Redirecting to ${plan} enrollment...`);
+
+}
+
+function submitContact(event){
+
+event.preventDefault();
+
+document.getElementById("contactSuccess").classList.remove("hidden");
+
+event.target.reset();
+
+}
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry => {
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".card").forEach(card => {
+
+card.classList.add("hidden");
+
+observer.observe(card);
+
+});
+
+</script>
+
+</body>
+
+</html>
